@@ -14,9 +14,10 @@ pipeline {
             steps {
                 script {
                     // Get AWS credentials from Jenkins credentials
-                    withCredentials([[$class: 'AWS Credentials', credentialsId: AWS_CREDENTIALS_ID, accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-
-                        // Authenticate Docker with ECR
+                    withCredentials([string(credentialsId: AWS_CREDENTIALS_ID, variable: 'AWS_CREDENTIALS')]) {
+                        sh "echo \$AWS_CREDENTIALS > aws-credentials.txt"
+                        sh "aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID"
+                        sh "aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY"
                         sh "aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
 
                         // Build and push Docker image
