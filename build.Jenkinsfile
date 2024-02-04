@@ -6,7 +6,7 @@ pipeline {
         IMAGE_NAME = 'jihadroberta-image'
         DOCKERFILE_PATH = 'Dockerfile'
         AWS_CREDENTIALS_ID = 'AWS_CREDENTIALS_ID'
-        AWS_DEFAULT_REGION = 'us-west-1'
+        AWS_DEFAULT_REGION = 'us-east-1'
     }
 
     stages {
