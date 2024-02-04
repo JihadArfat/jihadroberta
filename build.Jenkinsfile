@@ -10,7 +10,7 @@ pipeline {
         stage('Build and Push') {
             steps {
                 script {
-                    sh "aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 352708296901.dkr.ecr.us-west-1.amazonaws.com"
+                    sh "aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin $ECR_REGISTRY_ID"
                     sh "docker build -t $ECR_REGISTRY_ID/jenkins:0.0.$BUILD_NUMBER ."
                     sh "docker push $ECR_REGISTRY_ID/jenkins:0.0.$BUILD_NUMBER"
                 }
