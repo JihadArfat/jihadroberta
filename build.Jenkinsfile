@@ -10,7 +10,7 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Build and Push') {
             steps {
                 script {
                     // Get AWS credentials from Jenkins credentials
@@ -19,9 +19,10 @@ pipeline {
                         // Authenticate Docker with ECR
                         sh "aws ecr-public get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY_ID"
 
-                        // Build and push Docker image
-                        sh "docker build -t $ECR_REGISTRY_ID/$IMAGE_NAME:latest -f $DOCKERFILE_PATH ."
-                        sh "docker push $ECR_REGISTRY_ID/$IMAGE_NAME:latest"
+                        // Build, tag, and push Docker image
+                        sh "docker build -t $IMAGE_NAME -f $DOCKERFILE_PATH ."
+                        sh "docker tag $IMAGE_NAME:latest $ECR_REGISTRY_ID:latest"
+                        sh "docker push $ECR_REGISTRY_ID:latest"
                     }
                 }
             }
