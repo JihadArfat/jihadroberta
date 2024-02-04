@@ -20,13 +20,13 @@ pipeline {
                 }
             }
         }
-    }
 
-    stage('Trigger Deploy') {
-        steps {
-            build job: 'RobertaDeploy' , wait: false, parameters: [
-                string(name: 'Roberta_IMAGE_URL', value: "${ECR_REGISTRY_ID}/jenkins:0.0.${BUILD_NUMBER}")
-            ]
+        stage('Trigger Deploy') {
+            steps {
+                build job: 'RobertaDeploy' , wait: false, parameters: [
+                    string(name: 'Roberta_IMAGE_URL', value: "${ECR_REGISTRY_ID}/jenkins:0.0.${BUILD_NUMBER}")
+                ]
+            }
         }
     }
 }
