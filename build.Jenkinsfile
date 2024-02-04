@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         ECR_REGISTRY_ID = '352708296901.dkr.ecr.us-west-1.amazonaws.com'
-        AWS_DEFAULT_REGION = 'us-west-1'
     }
 
     stages {
@@ -20,6 +19,14 @@ pipeline {
                     sh 'docker image prune -a --force'
                 }
             }
+        }
+    }
+
+    stage('Trigger Deploy') {
+        steps {
+            build job: 'RobertaDeploy' , wait: false, parameters: [
+                string(name: 'Roberta_IMAGE_URL', value: "${ECR_REGISTRY_ID}/jenkins:0.0.${BUILD_NUMBER}")
+            ]
         }
     }
 }
