@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        ECR_REGISTRY_ID = 'public.ecr.aws/r7m7o9d4/jihad'
-        AWS_DEFAULT_REGION = 'us-east-1'
+        ECR_REGISTRY_ID = '352708296901.dkr.ecr.us-west-1.amazonaws.com/jenkins'
+        AWS_DEFAULT_REGION = 'us-west-1'
     }
 
     stages {
