@@ -21,8 +21,8 @@ pipeline {
 
                         // Build and push Docker image
                         sh "docker build -t $IMAGE_NAME -f $DOCKERFILE_PATH ."
-                        sh "docker tag $IMAGE_NAME:latest $ECR_REGISTRY_ID/jihad:latest"
-                        sh "docker push $ECR_REGISTRY_ID/jihad:latest"
+                        sh "docker tag $IMAGE_NAME:latest $ECR_REGISTRY_ID/$IMAGE_NAME:latest"
+                        sh "docker push $ECR_REGISTRY_ID/$IMAGE_NAME:latest"
                     }
                 }
             }
