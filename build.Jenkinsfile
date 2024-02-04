@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         ECR_REGISTRY_ID = 'public.ecr.aws/r7m7o9d4/jihad'
-        IMAGE_NAME = 'jihadroberta-image'
         AWS_DEFAULT_REGION = 'us-east-1'
     }
 
@@ -12,8 +11,8 @@ pipeline {
             steps {
                 script {
                     sh "aws ecr-public get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY_ID"
-                    sh "docker build -t $ECR_REGISTRY_ID/$IMAGE_NAME:0.0.$BUILD_NUMBER ."
-                    sh "docker push $ECR_REGISTRY_ID/$IMAGE_NAME:0.0.$BUILD_NUMBER"
+                    sh "docker build -t $ECR_REGISTRY_ID/jihadroberta:0.0.$BUILD_NUMBER ."
+                    sh "docker push $ECR_REGISTRY_ID/jihadroberta:0.0.$BUILD_NUMBER"
                 }
             }
             post {
