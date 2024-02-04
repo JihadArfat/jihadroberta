@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         ECR_REGISTRY_ID = 'public.ecr.aws/r7m7o9d4'
-        IMAGE_NAME = 'jihad/latest'
+        IMAGE_NAME = ''
         DOCKERFILE_PATH = 'Dockerfile'
         AWS_CREDENTIALS_ID = 'AWS_CREDENTIALS_ID'
         AWS_DEFAULT_REGION = 'us-east-1'
